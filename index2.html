@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clovier Persianas — Transformamos luz em bem-estar</title>
+<meta name="description" content="Persianas e cortinas sob medida para ambientes modernos e sofisticados. Rolô Screen, Blackout, Persiana Externa e automação residencial em São Paulo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  :root{
+    --bg-void:#141210;
+    --bg-panel:#1c1916;
+    --bg-panel-2:#221e1a;
+    --gold:#c5a059;
+    --gold-soft:#d9bd88;
+    --gold-deep:#8b6f3f;
+    --cream:#f3eee4;
+    --cream-dim:#cfc7b8;
+    --ink:#141210;
+    --hairline:rgba(197,160,89,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-void);
+    color:var(--cream);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  .font-display{font-family:'Cormorant Garamond', serif;}
+
+  ::selection{background:var(--gold); color:var(--ink);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:1px solid var(--gold);
+    outline-offset:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* --- slat motif: used as section dividers, echoing the product itself --- */
+  .slats{
+    height:14px;
+    width:100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--hairline) 0px,
+      var(--hairline) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    opacity:.7;
+  }
+
+  .arc-rule{
+    position:relative;
+  }
+  .arc-rule::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; top:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent 0%, var(--gold) 18%, var(--gold-soft) 50%, var(--gold) 82%, transparent 100%);
+  }
+
+  /* nav */
+  #site-nav{
+    transition: background-color .4s ease, box-shadow .4s ease, padding .4s ease;
+    background:transparent;
+  }
+  #site-nav.scrolled{
+    background:rgba(20,18,16,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--hairline);
+  }
+
+  .nav-link{
+    position:relative;
+    color:var(--cream-dim);
+    transition:color .3s ease;
+  }
+  .nav-link::after{
+    content:"";
+    position:absolute; left:0; bottom:-6px;
+    width:0; height:1px;
+    background:var(--gold);
+    transition:width .35s ease;
+  }
+  .nav-link:hover{color:var(--cream);}
+  .nav-link:hover::after{width:100%;}
+
+  /* buttons */
+  .btn-gold{
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    color:var(--ink);
+    transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+    box-shadow:0 6px 20px -8px rgba(197,160,89,0.55);
+  }
+  .btn-gold:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 26px -8px rgba(197,160,89,0.7);
+    filter:brightness(1.04);
+  }
+  .btn-gold:active{transform:translateY(0px) scale(.98);}
+
+  .btn-outline{
+    border:1px solid var(--hairline);
+    color:var(--cream);
+    transition:border-color .3s ease, background-color .3s ease;
+  }
+  .btn-outline:hover{
+    border-color:var(--gold);
+    background:rgba(197,160,89,0.06);
+  }
+
+  /* hero slat reveal on load */
+  .hero-media{position:relative; overflow:hidden;}
+  .hero-media img{
+    display:block; width:100%; height:100%; object-fit:cover;
+  }
+  .slat-panel{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    pointer-events:none;
+    z-index:5;
+  }
+  .slat-panel .slat{
+    flex:1; background:var(--bg-void);
+    transform-origin:top;
+    animation: slat-open .9s cubic-bezier(.65,0,.35,1) forwards;
+  }
+
+  @keyframes slat-open{
+    to{ transform:scaleY(0); }
+  }
+
+  .hero-fade-item{
+    opacity:0; transform:translateY(14px);
+    animation: hero-in .8s ease forwards;
+  }
+  @keyframes hero-in{ to{opacity:1; transform:translateY(0);} }
+
+  /* product card */
+  .product-card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--hairline);
+    background:var(--bg-panel);
+  }
+  .product-card .pc-media{
+    overflow:hidden;
+    position:relative;
+  }
+  .product-card .pc-media img{
+    transition: transform .8s cubic-bezier(.16,1,.3,1);
+    width:100%; height:100%; object-fit:cover;
+  }
+  .product-card:hover .pc-media img{
+    transform:scale(1.06);
+  }
+  .product-card .pc-line{
+    height:1px; width:2.25rem;
+    background:var(--gold);
+    transition:width .4s ease;
+  }
+  .product-card:hover .pc-line{ width:4.5rem; }
+
+  /* benefit / process item */
+  .rail-item{
+    border-top:1px solid var(--hairline);
+  }
+  .rail-item:last-child{}
+
+  /* whatsapp float */
+  #wa-float{
+    box-shadow:0 8px 26px -6px rgba(0,0,0,.55);
+  }
+  #wa-float .pulse-ring{
+    position:absolute; inset:0; border-radius:9999px;
+    border:1px solid var(--gold);
+    animation:pulse-ring 2.6s ease-out infinite;
+  }
+  @keyframes pulse-ring{
+    0%{ transform:scale(1); opacity:.55; }
+    100%{ transform:scale(1.9); opacity:0; }
+  }
+
+  .marquee-track{
+    display:flex; gap:3.5rem; white-space:nowrap;
+  }
+
+  input::placeholder, textarea::placeholder{color:#8a8276;}
+
+  .clip-arc{
+    clip-path: ellipse(140% 100% at 50% 0%);
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="site-nav" class="fixed top-0 inset-x-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+    <a href="#topo" class="flex items-center gap-3">
+      <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 8C27 8 8 27 8 50s19 42 42 42" stroke="#C5A059" stroke-width="3" stroke-linecap="round"/>
+        <path d="M50 20a30 30 0 1 0 0 60" stroke="#C5A059" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        <circle cx="50" cy="50" r="4" fill="#C5A059"/>
+      </svg>
+      <span class="font-display text-2xl tracking-wide text-[var(--cream)]">Clovier <span class="text-[var(--gold)] italic font-normal">Persianas</span></span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-10 text-[15px] tracking-wide">
+      <a href="#modelos" class="nav-link">Modelos</a>
+      <a href="#diferenciais" class="nav-link">Diferenciais</a>
+      <a href="#automacao" class="nav-link">Automação</a>
+      <a href="#processo" class="nav-link">Sobre</a>
+      <a href="#contato" class="nav-link">Contato</a>
+    </nav>
+
+    <a href="https://wa.me/5511930078719" target="_blank" rel="noopener"
+       class="hidden lg:inline-flex btn-gold items-center gap-2 px-6 py-2.5 rounded-sm text-[13px] tracking-[0.08em] font-medium">
+      Solicite um orçamento
+    </a>
+
+    <button id="menu-btn" aria-label="Abrir menu" aria-expanded="false" class="lg:hidden text-[var(--cream)]">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-[var(--bg-panel)] border-t border-[var(--hairline)]">
+    <nav class="flex flex-col px-6 py-6 gap-5 text-[15px]">
+      <a href="#modelos" class="nav-link">Modelos</a>
+      <a href="#diferenciais" class="nav-link">Diferenciais</a>
+      <a href="#automacao" class="nav-link">Automação</a>
+      <a href="#processo" class="nav-link">Sobre</a>
+      <a href="#contato" class="nav-link">Contato</a>
+      <a href="https://wa.me/5511930078719" target="_blank" rel="noopener" class="btn-gold text-center px-6 py-3 rounded-sm text-[13px] tracking-[0.08em] font-medium mt-2">Solicite um orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="topo" class="relative pt-20 overflow-hidden">
+  <div class="grid lg:grid-cols-[1.05fr_1fr] lg:min-h-[86vh]">
+
+    <div class="flex flex-col justify-center px-6 lg:px-16 py-14 sm:py-16 lg:py-0 relative z-10">
+      <p class="hero-fade-item font-jost text-[11px] sm:text-[13px] tracking-[0.18em] sm:tracking-[0.35em] text-[var(--gold)]" style="animation-delay:.15s">CONFORTO · SOFISTICAÇÃO · QUALIDADE</p>
+
+      <h1 class="hero-fade-item font-display leading-[1.05] text-[var(--cream)] mt-6" style="animation-delay:.3s">
+        <span class="block text-4xl sm:text-5xl lg:text-6xl">Transformamos</span>
+        <span class="block text-4xl sm:text-5xl lg:text-6xl italic text-[var(--gold)]">luz em bem-estar</span>
+      </h1>
+
+      <p class="hero-fade-item text-[var(--cream-dim)] text-lg leading-relaxed mt-7 max-w-md" style="animation-delay:.45s">
+        Soluções completas em persianas e cortinas para ambientes modernos e sofisticados — projetadas sob medida, do primeiro contato à instalação.
+      </p>
+
+      <div class="hero-fade-item flex flex-wrap gap-4 mt-10" style="animation-delay:.6s">
+        <a href="https://wa.me/5511930078719" target="_blank" rel="noopener"
+           class="btn-gold inline-flex items-center gap-3 px-7 py-3.5 rounded-sm text-[13px] tracking-[0.08em] font-medium">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm5.2 14.2c-.22.62-1.28 1.19-1.77 1.24-.45.05-1.03.07-1.66-.1-.38-.11-.87-.28-1.5-.55-2.64-1.14-4.36-3.82-4.5-4-.13-.18-1.08-1.44-1.08-2.75 0-1.3.68-1.94.93-2.2.24-.27.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.82.87.27.13.44.2.51.31.07.11.07.65-.15 1.27Z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a href="#modelos" class="btn-outline inline-flex items-center gap-2 px-7 py-3.5 rounded-sm text-[13px] tracking-[0.08em]">
+          Ver modelos
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-media relative min-h-[46vh] lg:min-h-0">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1400&auto=format&fit=crop"
+           alt="Sala de estar contemporânea com persianas externas e luz do entardecer">
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-void)]/60 via-transparent to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-void)]/70 lg:from-[var(--bg-void)]/40 to-transparent"></div>
+
+      <div class="slat-panel" aria-hidden="true">
+        <div class="slat" style="animation-delay:.05s"></div>
+        <div class="slat" style="animation-delay:.14s"></div>
+        <div class="slat" style="animation-delay:.23s"></div>
+        <div class="slat" style="animation-delay:.32s"></div>
+        <div class="slat" style="animation-delay:.41s"></div>
+        <div class="slat" style="animation-delay:.5s"></div>
+        <div class="slat" style="animation-delay:.59s"></div>
+        <div class="slat" style="animation-delay:.68s"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFERENCIAIS ============ -->
+<section id="diferenciais" class="relative arc-rule bg-[var(--bg-panel)] py-16 lg:py-20">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+
+      <div class="rail-item lg:border-t-0 px-2 py-8 lg:py-2 lg:px-8 flex flex-col gap-4">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Controle de luminosidade</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed">Ajuste a entrada de luz natural em cada ambiente, do difuso ao total escurecimento.</p>
+      </div>
+
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-2 lg:px-8 flex flex-col gap-4">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Privacidade e conforto térmico</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed">Barreiras que preservam sua intimidade e reduzem a troca de calor com o exterior.</p>
+      </div>
+
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-2 lg:px-8 flex flex-col gap-4">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><path d="M4 11.5 12 4l8 7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Valorização do ambiente</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed">Acabamentos que elevam a percepção de qualidade de cada cômodo e fachada.</p>
+      </div>
+
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-2 lg:px-8 flex flex-col gap-4">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><path d="M12 3l2.2 4.7 5.1.5-3.9 3.5 1.1 5.1L12 14.9 7.5 16.8l1.1-5.1-3.9-3.5 5.1-.5L12 3Z" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Materiais de alta qualidade</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed">Tecidos e componentes selecionados, feitos para durar com o uso diário.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODELOS ============ -->
+<section id="modelos" class="bg-[var(--bg-void)] py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="max-w-xl mb-14 lg:mb-20">
+      <p class="text-[13px] tracking-[0.3em] text-[var(--gold)]">NOSSOS MODELOS</p>
+      <h2 class="font-display text-3xl sm:text-4xl mt-4 text-[var(--cream)]">Uma solução para cada janela, cada rotina de luz</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-px bg-[var(--hairline)]">
+
+      <article class="product-card">
+        <div class="pc-media aspect-[4/5]">
+          <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1000&auto=format&fit=crop" alt="Sala de estar clara com rolô screen bege">
+        </div>
+        <div class="p-8">
+          <div class="pc-line mb-5"></div>
+          <h3 class="font-display text-2xl text-[var(--cream)]">Rolô Screen</h3>
+          <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Ideal para ambientes modernos, controla a luz solar sem escurecer totalmente o ambiente.</p>
+          <p class="text-xs text-[var(--gold-soft)] mt-5 tracking-wide">Diversas opções de tecidos e transparências</p>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="pc-media aspect-[4/5]">
+          <img src="https://images.unsplash.com/photo-1616627561950-9f746e330187?q=80&w=1000&auto=format&fit=crop" alt="Quarto escuro com rolô blackout fechado">
+        </div>
+        <div class="p-8">
+          <div class="pc-line mb-5"></div>
+          <h3 class="font-display text-2xl text-[var(--cream)]">Rolô Blackout</h3>
+          <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Bloqueia 100% da luz, proporcionando mais conforto térmico e privacidade.</p>
+          <p class="text-xs text-[var(--gold-soft)] mt-5 tracking-wide">Perfeito para quartos e salas de TV</p>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="pc-media aspect-[4/5]">
+          <img src="https://images.unsplash.com/photo-1580216643062-cf460548a66a?q=80&w=1000&auto=format&fit=crop" alt="Fachada com persianas externas motorizadas">
+        </div>
+        <div class="p-8">
+          <div class="pc-line mb-5"></div>
+          <h3 class="font-display text-2xl text-[var(--cream)]">Persiana Externa</h3>
+          <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Proteção solar, conforto térmico e privacidade para fachadas, varandas e áreas externas.</p>
+          <p class="text-xs text-[var(--gold-soft)] mt-5 tracking-wide">Mais segurança e eficiência energética</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOMAÇÃO ============ -->
+<section id="automacao" class="bg-[var(--bg-panel)] arc-rule py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+    <div>
+      <p class="text-[13px] tracking-[0.3em] text-[var(--gold)]">AUTOMAÇÃO E TECNOLOGIA</p>
+      <h2 class="font-display text-3xl sm:text-4xl mt-4 text-[var(--cream)] leading-tight">Sua persiana, no seu comando</h2>
+      <p class="text-[var(--cream-dim)] leading-relaxed mt-6 max-w-md">
+        Persianas motorizadas com acionamento por controle remoto, aplicativo ou comando de voz — abra e feche cada ambiente sem sair do lugar.
+      </p>
+
+      <div class="mt-10 grid grid-cols-3 gap-6 max-w-sm">
+        <div class="flex flex-col items-center gap-2 text-center">
+          <div class="w-14 h-14 rounded-full border border-[var(--hairline)] flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><path d="M4 12a8 8 0 1 1 8 8" stroke-linecap="round"/><path d="M4 12 2 10m2 2 2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="text-xs text-[var(--cream-dim)] tracking-wide">Alexa</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 text-center">
+          <div class="w-14 h-14 rounded-full border border-[var(--hairline)] flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.6" fill="#C5A059" stroke="none"/></svg>
+          </div>
+          <span class="text-xs text-[var(--cream-dim)] tracking-wide">Google Assistente</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 text-center">
+          <div class="w-14 h-14 rounded-full border border-[var(--hairline)] flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3"><path d="M4 11.5 12 4l8 7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="text-xs text-[var(--cream-dim)] tracking-wide">Casa inteligente</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative rounded-sm overflow-hidden aspect-[4/3]">
+      <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1200&auto=format&fit=crop"
+           alt="Mão acionando controle remoto de persiana motorizada" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-void)]/70 to-transparent"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PROCESSO / COMPROMISSO ============ -->
+<section id="processo" class="bg-[var(--bg-void)] py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="max-w-xl mb-14 lg:mb-20">
+      <p class="text-[13px] tracking-[0.3em] text-[var(--gold)]">NOSSO COMPROMISSO</p>
+      <h2 class="font-display text-3xl sm:text-4xl mt-4 text-[var(--cream)]">Do orçamento ao pós-venda, cuidamos de cada etapa</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-[var(--hairline)]">
+      <div class="rail-item lg:border-t-0 px-2 py-8 lg:py-10 lg:px-8">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3" class="mb-5"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M7 7v10M11 7v4M15 7v4M19 7v10" /></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Medição precisa</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Visita técnica no local para garantir o encaixe perfeito em cada vão.</p>
+      </div>
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-10 lg:px-8">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3" class="mb-5"><path d="M14.5 6.5 17 4l3 3-2.5 2.5M6 18l8.5-8.5M4 20l2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Instalação especializada</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Equipe própria treinada, do residencial ao corporativo.</p>
+      </div>
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-10 lg:px-8">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3" class="mb-5"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Garantia e pós-venda</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Suporte contínuo após a instalação, sem burocracia.</p>
+      </div>
+      <div class="rail-item lg:border-t-0 lg:border-l px-2 py-8 lg:py-10 lg:px-8">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.3" class="mb-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" stroke-linejoin="round"/></svg>
+        <h3 class="font-display text-xl text-[var(--cream)]">Atendimento personalizado</h3>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed mt-3">Um projeto conversado com você, do começo ao fim.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section id="contato" class="relative bg-[var(--bg-panel)] arc-rule py-24 lg:py-28 overflow-hidden">
+  <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+    <p class="text-[13px] tracking-[0.3em] text-[var(--gold)]">FALE COM A CLOVIER</p>
+    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl mt-4 text-[var(--cream)] leading-tight">
+      Solicite seu orçamento <span class="italic text-[var(--gold)]">sem compromisso</span>
+    </h2>
+    <p class="text-[var(--cream-dim)] mt-6 max-w-md mx-auto">Atendemos São Paulo e região. Fale agora pelo WhatsApp e receba uma proposta sob medida.</p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="https://wa.me/5511930078719" target="_blank" rel="noopener"
+         class="btn-gold inline-flex items-center gap-3 px-8 py-4 rounded-sm text-[13px] tracking-[0.08em] font-medium">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm5.2 14.2c-.22.62-1.28 1.19-1.77 1.24-.45.05-1.03.07-1.66-.1-.38-.11-.87-.28-1.5-.55-2.64-1.14-4.36-3.82-4.5-4-.13-.18-1.08-1.44-1.08-2.75 0-1.3.68-1.94.93-2.2.24-.27.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.82.87.27.13.44.2.51.31.07.11.07.65-.15 1.27Z"/></svg>
+        11 93007-8719
+      </a>
+      <span class="text-[var(--cream-dim)] text-sm">ou envie um e-mail para <a href="mailto:contato@clovierpersianas.com.br" class="text-[var(--gold-soft)] hover:text-[var(--gold)] transition-colors">contato@clovierpersianas.com.br</a></span>
+    </div>
+  </div>
+
+  <div class="slats absolute bottom-0 inset-x-0" aria-hidden="true"></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-[var(--bg-void)] pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[var(--hairline)]">
+
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><path d="M50 8C27 8 8 27 8 50s19 42 42 42" stroke="#C5A059" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="50" r="4" fill="#C5A059"/></svg>
+          <span class="font-display text-xl text-[var(--cream)]">Clovier Persianas</span>
+        </div>
+        <p class="text-sm text-[var(--cream-dim)] leading-relaxed">Qualidade em cada detalhe,<br>conforto em cada ambiente.</p>
+      </div>
+
+      <div>
+        <h4 class="text-xs tracking-[0.25em] text-[var(--gold)] mb-4">NAVEGAÇÃO</h4>
+        <ul class="space-y-3 text-sm text-[var(--cream-dim)]">
+          <li><a href="#modelos" class="hover:text-[var(--cream)] transition-colors">Modelos</a></li>
+          <li><a href="#diferenciais" class="hover:text-[var(--cream)] transition-colors">Diferenciais</a></li>
+          <li><a href="#automacao" class="hover:text-[var(--cream)] transition-colors">Automação</a></li>
+          <li><a href="#processo" class="hover:text-[var(--cream)] transition-colors">Sobre</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs tracking-[0.25em] text-[var(--gold)] mb-4">CONTATO</h4>
+        <ul class="space-y-3 text-sm text-[var(--cream-dim)]">
+          <li>São Paulo - SP</li>
+          <li><a href="https://wa.me/5511930078719" target="_blank" rel="noopener" class="hover:text-[var(--cream)] transition-colors">(11) 93007-8719</a></li>
+          <li><a href="https://www.clovierpersianas.com.br" target="_blank" rel="noopener" class="hover:text-[var(--cream)] transition-colors">clovierpersianas.com.br</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs tracking-[0.25em] text-[var(--gold)] mb-4">SOCIAL</h4>
+        <ul class="space-y-3 text-sm text-[var(--cream-dim)]">
+          <li><a href="https://instagram.com/clovierpersianas" target="_blank" rel="noopener" class="hover:text-[var(--cream)] transition-colors">@clovierpersianas</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[var(--cream-dim)]">
+      <span>© <span id="year"></span> Clovier Persianas. Todos os direitos reservados.</span>
+      <span>São Paulo - SP</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOAT ============ -->
+<a id="wa-float" href="https://wa.me/5511930078719" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"
+   class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center">
+  <span class="pulse-ring"></span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm5.2 14.2c-.22.62-1.28 1.19-1.77 1.24-.45.05-1.03.07-1.66-.1-.38-.11-.87-.28-1.5-.55-2.64-1.14-4.36-3.82-4.5-4-.13-.18-1.08-1.44-1.08-2.75 0-1.3.68-1.94.93-2.2.24-.27.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.25.09 1.55.73 1.82.87.27.13.44.2.51.31.07.11.07.65-.15 1.27Z"/></svg>
+</a>
+
+<script>
+  // nav scroll state
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if(window.scrollY > 24){ nav.classList.add('scrolled'); }
+    else{ nav.classList.remove('scrolled'); }
+  };
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
